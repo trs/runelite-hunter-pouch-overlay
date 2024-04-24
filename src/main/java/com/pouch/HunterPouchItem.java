@@ -42,6 +42,10 @@ public enum HunterPouchItem {
         this.count = Math.max(0, this.count - value);
     }
 
+    public boolean isFull() {
+        return this.count >= this.capacity;
+    }
+
     public boolean isContainableItem(int itemID) {
         switch (itemID) {
             case ItemID.POLAR_KEBBIT_FUR:
@@ -54,6 +58,7 @@ public enum HunterPouchItem {
             case ItemID.LARUPIA_FUR:
             case ItemID.GRAAHK_FUR:
             case ItemID.KYATT_FUR:
+            case ItemID.FOX_FUR:
             case ItemID.SUNLIGHT_ANTELOPE_FUR:
             case ItemID.MOONLIGHT_ANTELOPE_FUR:
                 return this.type == HunterPouchType.FUR;
