@@ -12,6 +12,10 @@ public class HunterPouchMessage {
     public static boolean matches(Pattern pattern, String message) {
         return pattern.matcher(message).matches();
     }
+    
+    public static final Pattern POUCH_BANK_EMPTY = Pattern.compile("^You take some (?:meat|fur) out of the pouch.$");
+
+    public static final Pattern POUCH_BANK_FULL = Pattern.compile("^Your bank could not hold your (?:meat|fur).$");
 }
 
 

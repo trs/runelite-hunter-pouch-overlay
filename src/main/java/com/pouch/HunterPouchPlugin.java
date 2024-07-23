@@ -1,10 +1,7 @@
 package com.pouch;
 
-import com.google.inject.Provides;
-
 import javax.inject.Inject;
 
-import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.*;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.MenuOptionClicked;
@@ -18,7 +15,6 @@ import net.runelite.client.ui.overlay.OverlayManager;
 import java.util.*;
 import java.util.Deque;
 
-@Slf4j
 @PluginDescriptor(
         name = "Hunter Pouch Overlay"
 )
@@ -103,7 +99,9 @@ public class HunterPouchPlugin extends Plugin {
 
     @Subscribe
     public void onItemContainerChanged(ItemContainerChanged event) {
-        if (InventoryID.INVENTORY.getId() != event.getContainerId()) return;
+        var containerID = event.getContainerId();
+        var INVENTORY_ID = InventoryID.INVENTORY.getId();
+        if (containerID != INVENTORY_ID) return;
 
         var items = event.getItemContainer().getItems();
 
@@ -270,7 +268,8 @@ public class HunterPouchPlugin extends Plugin {
 
     @Subscribe
     public void onMenuOptionClicked(MenuOptionClicked event) {
-        switch (event.getMenuAction()) {
+        var action = event.getMenuAction();
+        switch (action) {
             case CANCEL: {
                 useItemIds.pollFirst();
                 break;
@@ -316,10 +315,10 @@ public class HunterPouchPlugin extends Plugin {
         }
     }
 
-
     @Subscribe
     public void onChatMessage(ChatMessage event) {
-        if (event.getType() != ChatMessageType.GAMEMESSAGE) return;
+        var type = event.getType();
+        if (type != ChatMessageType.GAMEMESSAGE && type != ChatMessageType.SPAM) return;
 
         var message = event.getMessage();
 
@@ -336,6 +335,19 @@ public class HunterPouchPlugin extends Plugin {
             while (menuClick != null) {
                 menuClick.pouch.count = 0;
 
+                menuClick = popFirstValidMenuClickMessage("Empty");
+            }
+        } 
+        else if (HunterPouchMessage.matches(HunterPouchMessage.POUCH_BANK_EMPTY, message)) {
+            var menuClick = popFirstValidMenuClickMessage("Empty");
+            while (menuClick != null) {
+                menuClick.pouch.count = 0;
+
+                menuClick = popFirstValidMenuClickMessage("Empty");
+            }
+        } else if (HunterPouchMessage.matches(HunterPouchMessage.POUCH_BANK_FULL, message)) {
+            var menuClick = popFirstValidMenuClickMessage("Empty");
+            while (menuClick != null) {
                 menuClick = popFirstValidMenuClickMessage("Empty");
             }
         } else {

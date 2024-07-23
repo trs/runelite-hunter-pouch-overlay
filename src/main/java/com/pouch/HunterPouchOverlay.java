@@ -2,7 +2,6 @@ package com.pouch;
 
 import java.awt.*;
 import javax.inject.Inject;
-import net.runelite.client.game.ItemManager;
 import net.runelite.client.ui.FontManager;
 import net.runelite.client.ui.overlay.WidgetItemOverlay;
 import net.runelite.api.widgets.WidgetItem;

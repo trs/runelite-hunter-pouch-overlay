@@ -81,14 +81,19 @@ public enum HunterPouchItem {
     public static HunterPouchItem forItemID(int itemID) {
         switch (itemID) {
             case ItemID.SMALL_FUR_POUCH:
+            case ItemID.SMALL_FUR_POUCH_OPEN:
                 return HunterPouchItem.SMALL_FUR_POUCH;
             case ItemID.MEDIUM_FUR_POUCH:
+            case ItemID.MEDIUM_FUR_POUCH_OPEN:
                 return HunterPouchItem.MEDIUM_FUR_POUCH;
             case ItemID.LARGE_FUR_POUCH:
+            case ItemID.LARGE_FUR_POUCH_OPEN:
                 return HunterPouchItem.LARGE_FUR_POUCH;
             case ItemID.SMALL_MEAT_POUCH:
+            case ItemID.SMALL_MEAT_POUCH_OPEN:
                 return HunterPouchItem.SMALL_MEAT_POUCH;
             case ItemID.LARGE_MEAT_POUCH:
+            case ItemID.LARGE_MEAT_POUCH_OPEN:
                 return HunterPouchItem.LARGE_MEAT_POUCH;
             default:
                 return null;
