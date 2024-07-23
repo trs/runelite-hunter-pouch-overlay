@@ -9,7 +9,6 @@ import net.runelite.api.*;
 import net.runelite.api.events.ItemContainerChanged;
 import net.runelite.api.events.MenuOptionClicked;
 import net.runelite.api.events.ChatMessage;
-import net.runelite.client.config.ConfigManager;
 import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.ItemManager;
 import net.runelite.client.plugins.Plugin;
@@ -35,9 +34,6 @@ public class HunterPouchPlugin extends Plugin {
 
     @Inject
     private Client client;
-
-    @Inject
-    private HunterPouchConfig config;
 
     private final Item[] currentInventoryItems = new Item[28];
 
@@ -354,10 +350,5 @@ public class HunterPouchPlugin extends Plugin {
             }
 
         }
-    }
-
-    @Provides
-    HunterPouchConfig provideConfig(ConfigManager configManager) {
-        return configManager.getConfig(HunterPouchConfig.class);
     }
 }
